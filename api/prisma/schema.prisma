@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Supervisor {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
+
+/** Allowed biometric scanner devices; scan endpoint accepts requests only when x-device-id matches one of these. */
+model Device {
+  id        String   @id @default(uuid())
+  deviceId  String   @unique  // e.g. "gate-1", sent in x-device-id header
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model Worker {
+  id          String             @id @default(uuid())
+  biometricId String             @unique
+  name        String // required: needed to identify worker for attendance and payment
+  isActive    Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  attendance  AttendanceRecord[]
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  HALF_DAY
+}
+
+model AttendanceRecord {
+  id           String           @id @default(uuid())
+  workerId     String
+  worker       Worker           @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  deviceId     String?          // entry point / device that registered this record (null for cron-created ABSENT)
+  checkInTime  DateTime?
+  checkOutTime DateTime?
+  date         DateTime
+  status       AttendanceStatus @default(ABSENT)
+  createdAt    DateTime         @default(now())
+
+  // One record per worker per day; used as findUnique(where: { workerId_date: { workerId, date } })
+  @@unique([workerId, date])
+}

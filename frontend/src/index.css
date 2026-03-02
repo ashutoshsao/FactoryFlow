@@ -1,0 +1,263 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1a1a1a;
+  background-color: #f5f5f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e5e7eb;
+  --surface: #ffffff;
+  --error: #b91c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  color: inherit;
+}
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: #eff6ff;
+}
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+button.primary,
+.btn-logout {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+button.primary:hover:not(:disabled),
+.btn-logout:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+
+input {
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+}
+input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Login */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 22rem;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.login-card h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+.login-subtitle {
+  margin: 0 0 1.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-card button {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  font-weight: 500;
+}
+.login-card button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.login-card button[type="submit"]:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.login-error {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--error);
+}
+
+/* Dashboard */
+.dashboard {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.dashboard-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.supervisor-name {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: #fafafa;
+}
+
+.filters label {
+  max-width: 12rem;
+}
+
+.dashboard-error {
+  margin: 1rem 1.5rem;
+  padding: 0.75rem;
+  background: #fef2f2;
+  color: var(--error);
+  font-size: 0.875rem;
+  border-radius: 6px;
+}
+
+.table-wrap {
+  padding: 1rem 1.5rem;
+  overflow-x: auto;
+}
+
+.loading,
+.empty {
+  margin: 0;
+  padding: 1rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.attendance-table th,
+.attendance-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.attendance-table th {
+  font-weight: 600;
+  color: #374151;
+  background: #f9fafb;
+}
+
+.attendance-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.biometric-id {
+  color: #6b7280;
+  font-size: 0.8125rem;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-present {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-absent {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.status-half_day {
+  background: #fef9c3;
+  color: #854d0e;
+}
